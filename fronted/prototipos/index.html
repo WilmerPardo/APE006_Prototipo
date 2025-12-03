@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Inicio / Dashboard - Mi Diario Ganadero</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+    <style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#21d411",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#122210",
+                        "primary-darker": "#0f1b0d",
+                        "primary-lighter": "#e8f3e7",
+                        "primary-border": "#d1e7cf",
+                        "primary-text": "#529a4c",
+                        "success": "#078823",
+                        "danger": "#e72208"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="flex min-h-screen">
+            <aside class="w-64 flex-shrink-0 bg-white dark:bg-primary-darker/50 p-4 border-r border-primary-border dark:border-primary-darker hidden md:block">
+                <div class="flex flex-col gap-8 sticky top-4">
+                    <div class="flex gap-3 items-center">
+                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Finca San José logo" style='background-image: url("static/images/logo.png"); background-color: #e8f3e7;'></div>
+                        <div class="flex flex-col">
+                            <h1 class="text-primary-darker dark:text-primary-lighter text-base font-medium leading-normal">Finca San José</h1>
+                            <p class="text-primary-text dark:text-primary-text/80 text-sm font-normal leading-normal">Usuario</p>
+                        </div>
+                    </div>
+                    
+                    <nav class="flex flex-col gap-2">
+                        <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary-lighter dark:bg-primary/20" href="index.html">
+                            <span class="material-symbols-outlined text-primary-darker dark:text-primary-lighter" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                            <p class="text-primary-darker dark:text-primary-lighter text-sm font-medium leading-normal">Inicio</p>
+                        </a>
+                        
+                        <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary-lighter/60 dark:hover:bg-primary/10 transition-colors" href="inventario.html">
+                            <span class="material-symbols-outlined text-primary-darker dark:text-primary-lighter">inventory_2</span>
+                            <p class="text-primary-darker dark:text-primary-lighter text-sm font-medium leading-normal">Inventario</p>
+                        </a>
+
+                        <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary-lighter/60 dark:hover:bg-primary/10 transition-colors" href="salud.html">
+                            <span class="material-symbols-outlined text-primary-darker dark:text-primary-lighter">medical_services</span>
+                            <p class="text-primary-darker dark:text-primary-lighter text-sm font-medium leading-normal">Salud</p>
+                        </a>
+
+                        <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary-lighter/60 dark:hover:bg-primary/10 transition-colors" href="historial.html">
+                            <span class="material-symbols-outlined text-primary-darker dark:text-primary-lighter">history</span>
+                            <p class="text-primary-darker dark:text-primary-lighter text-sm font-medium leading-normal">Historial</p>
+                        </a>
+
+                        <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary-lighter/60 dark:hover:bg-primary/10 transition-colors" href="reportes.html">
+                            <span class="material-symbols-outlined text-primary-darker dark:text-primary-lighter">bar_chart</span>
+                            <p class="text-primary-darker dark:text-primary-lighter text-sm font-medium leading-normal">Reportes</p>
+                        </a>
+
+                        <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary-lighter/60 dark:hover:bg-primary/10 transition-colors" href="configuracion.html">
+                            <span class="material-symbols-outlined text-primary-darker dark:text-primary-lighter">settings</span>
+                            <p class="text-primary-darker dark:text-primary-lighter text-sm font-medium leading-normal">Configuración</p>
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+
+            <main class="flex-1 p-6 lg:p-10">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-wrap justify-between gap-4 items-center mb-8">
+                        <div class="flex flex-col gap-2">
+                            <p class="text-primary-darker dark:text-primary-lighter text-4xl font-black leading-tight tracking-[-0.033em]">Resumen General</p>
+                            <p class="text-primary-text dark:text-primary-text/80 text-base font-normal leading-normal">Un vistazo rápido al estado actual de tu finca.</p>
+                        </div>
+                        <a href="nuevo_animal.html" class="flex items-center justify-center gap-2 min-w-[84px] max-w-[480px] cursor-pointer overflow-hidden rounded-lg h-10 px-4 bg-primary text-primary-darker text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity">
+                            <span class="material-symbols-outlined">add</span>
+                            <span class="truncate">Añadir Nuevo Animal</span>
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-primary-darker/50 border border-primary-border dark:border-primary-darker">
+                            <p class="text-primary-darker dark:text-primary-lighter text-base font-medium leading-normal">Total de Animales</p>
+                            <p class="text-primary-darker dark:text-primary-lighter tracking-tight text-3xl font-bold leading-tight">452</p>
+                            <p class="text-success text-sm font-medium leading-normal flex items-center"><span class="material-symbols-outlined text-base">trending_up</span>+1.2%</p>
+                        </div>
+                        <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-primary-darker/50 border border-primary-border dark:border-primary-darker">
+                            <p class="text-primary-darker dark:text-primary-lighter text-base font-medium leading-normal">Animales Enfermos</p>
+                            <p class="text-primary-darker dark:text-primary-lighter tracking-tight text-3xl font-bold leading-tight">5</p>
+                            <p class="text-success text-sm font-medium leading-normal flex items-center"><span class="material-symbols-outlined text-base">trending_up</span>+2.0%</p>
+                        </div>
+                        <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-primary-darker/50 border border-primary-border dark:border-primary-darker">
+                            <p class="text-primary-darker dark:text-primary-lighter text-base font-medium leading-normal">Ventas (30 días)</p>
+                            <p class="text-primary-darker dark:text-primary-lighter tracking-tight text-3xl font-bold leading-tight">$12,500</p>
+                            <p class="text-danger text-sm font-medium leading-normal flex items-center"><span class="material-symbols-outlined text-base">trending_down</span>-5.0%</p>
+                        </div>
+                        <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-primary-darker/50 border border-primary-border dark:border-primary-darker">
+                            <p class="text-primary-darker dark:text-primary-lighter text-base font-medium leading-normal">Nacimientos (30 días)</p>
+                            <p class="text-primary-darker dark:text-primary-lighter tracking-tight text-3xl font-bold leading-tight">12</p>
+                            <p class="text-success text-sm font-medium leading-normal flex items-center"><span class="material-symbols-outlined text-base">trending_up</span>+10.0%</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3 mb-8">
+                        <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-primary-darker text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity">
+                            <span class="truncate">Registrar Venta</span>
+                        </button>
+                        <a href="inventario.html" class="flex items-center justify-center min-w-[84px] max-w-[480px] cursor-pointer overflow-hidden rounded-lg h-10 px-4 bg-primary-lighter dark:bg-primary/20 text-primary-darker dark:text-primary-lighter text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary-lighter/80 dark:hover:bg-primary/30 transition-colors">
+                            <span class="truncate">Ver Inventario Completo</span>
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="flex w-full flex-col gap-2 rounded-xl border border-primary-border dark:border-primary-darker bg-white dark:bg-primary-darker/50 p-6">
+                            <p class="text-primary-darker dark:text-primary-lighter text-base font-medium leading-normal">Composición del Rebaño</p>
+                            <p class="text-primary-darker dark:text-primary-lighter tracking-light text-[32px] font-bold leading-tight truncate">452 Animales</p>
+                            <div class="flex gap-1">
+                                <p class="text-primary-text dark:text-primary-text/80 text-base font-normal leading-normal">Por Categoría</p>
+                                <p class="text-success text-base font-medium leading-normal">+3%</p>
+                            </div>
+                            <div class="grid min-h-[180px] grid-flow-col gap-6 grid-rows-[1fr_auto] items-end justify-items-center px-3 pt-4">
+                                <div class="bg-primary/30 dark:bg-primary/40 w-full rounded-t" style="height: 45%;"></div>
+                                <p class="text-primary-text dark:text-primary-text/80 text-[13px] font-bold leading-normal tracking-[0.015em]">Vacas</p>
+                                <div class="bg-primary/30 dark:bg-primary/40 w-full rounded-t" style="height: 15%;"></div>
+                                <p class="text-primary-text dark:text-primary-text/80 text-[13px] font-bold leading-normal tracking-[0.015em]">Toros</p>
+                                <div class="bg-primary/30 dark:bg-primary/40 w-full rounded-t" style="height: 25%;"></div>
+                                <p class="text-primary-text dark:text-primary-text/80 text-[13px] font-bold leading-normal tracking-[0.015em]">Terneros</p>
+                                <div class="bg-primary/30 dark:bg-primary/40 w-full rounded-t" style="height: 15%;"></div>
+                                <p class="text-primary-text dark:text-primary-text/80 text-[13px] font-bold leading-normal tracking-[0.015em]">Novillos</p>
+                            </div>
+                        </div>
+                        <div class="flex w-full flex-col gap-2 rounded-xl border border-primary-border dark:border-primary-darker bg-white dark:bg-primary-darker/50 p-6">
+                            <p class="text-primary-darker dark:text-primary-lighter text-base font-medium leading-normal">Evolución del Inventario</p>
+                            <p class="text-primary-darker dark:text-primary-lighter tracking-light text-[32px] font-bold leading-tight truncate">Últimos 6 meses</p>
+                            <div class="flex gap-1">
+                                <p class="text-primary-text dark:text-primary-text/80 text-base font-normal leading-normal">Mensual</p>
+                                <p class="text-success text-base font-medium leading-normal">+1.5%</p>
+                            </div>
+                            <div class="flex min-h-[180px] flex-1 flex-col gap-8 py-4">
+                                <svg fill="none" height="148" preserveaspectratio="none" viewbox="-3 0 478 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H326.769H0V109Z" fill="url(#paint0_linear_1131_5935)"></path>
+                                    <path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25" stroke="#21d411" stroke-linecap="round" stroke-width="3"></path>
+                                    <defs>
+                                        <lineargradient gradientunits="userSpaceOnUse" id="paint0_linear_1131_5935" x1="236" x2="236" y1="1" y2="149">
+                                            <stop stop-color="#21d411" stop-opacity="0.2"></stop>
+                                            <stop offset="1" stop-color="#21d411" stop-opacity="0"></stop>
+                                        </lineargradient>
+                                    </defs>
+                                </svg>
+                                <div class="flex justify-around">
+                                    <p class="text-primary-text dark:text-primary-text/80 text-[13px] font-bold leading-normal tracking-[0.015em]">Ene</p>
+                                    <p class="text-primary-text dark:text-primary-text/80 text-[13px] font-bold leading-normal tracking-[0.015em]">Feb</p>
+                                    <p class="text-primary-text dark:text-primary-text/80 text-[13px] font-bold leading-normal tracking-[0.015em]">Mar</p>
+                                    <p class="text-primary-text dark:text-primary-text/80 text-[13px] font-bold leading-normal tracking-[0.015em]">Abr</p>
+                                    <p class="text-primary-text dark:text-primary-text/80 text-[13px] font-bold leading-normal tracking-[0.015em]">May</p>
+                                    <p class="text-primary-text dark:text-primary-text/80 text-[13px] font-bold leading-normal tracking-[0.015em]">Jun</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Reportes - Mi Diario Ganadero</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#21d411",
+                        "primary-dark": "#1a2e18",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#122210",
+                        "primary-darker": "#0f1b0d",
+                        "primary-lighter": "#e8f3e7",
+                        "primary-border": "#d1e7cf",
+                        "primary-text": "#529a4c",
+                        "success": "#078823",
+                        "danger": "#e72208"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light text-[#1f2937] font-display h-screen flex overflow-hidden">
+
+    <aside class="w-64 flex-shrink-0 bg-white dark:bg-primary-darker/50 p-4 border-r border-primary-border dark:border-primary-darker hidden md:block z-30">
+        <div class="flex flex-col gap-8 sticky top-4">
+            <div class="flex gap-3 items-center">
+                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" 
+                     style='background-image: url("static/images/logo.png"); background-color: #e8f3e7;'></div>
+                <div class="flex flex-col">
+                    <h1 class="text-primary-darker dark:text-primary-lighter text-base font-medium leading-normal">Finca San José</h1>
+                    <p class="text-primary-text dark:text-primary-text/80 text-sm font-normal leading-normal">Usuario</p>
+                </div>
+            </div>
+            
+            <nav class="flex flex-col gap-2">
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary-lighter/60 dark:hover:bg-primary/10 transition-colors" href="index.html">
+                    <span class="material-symbols-outlined text-primary-darker dark:text-primary-lighter">dashboard</span>
+                    <p class="text-primary-darker dark:text-primary-lighter text-sm font-medium leading-normal">Inicio</p>
+                </a>
+                
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary-lighter/60 dark:hover:bg-primary/10 transition-colors" href="inventario.html">
+                    <span class="material-symbols-outlined text-primary-darker dark:text-primary-lighter">inventory_2</span>
+                    <p class="text-primary-darker dark:text-primary-lighter text-sm font-medium leading-normal">Inventario</p>
+                </a>
+
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary-lighter/60 dark:hover:bg-primary/10 transition-colors" href="salud.html">
+                    <span class="material-symbols-outlined text-primary-darker dark:text-primary-lighter">medical_services</span>
+                    <p class="text-primary-darker dark:text-primary-lighter text-sm font-medium leading-normal">Salud</p>
+                </a>
+
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary-lighter/60 dark:hover:bg-primary/10 transition-colors" href="historial.html">
+                    <span class="material-symbols-outlined text-primary-darker dark:text-primary-lighter">history</span>
+                    <p class="text-primary-darker dark:text-primary-lighter text-sm font-medium leading-normal">Historial</p>
+                </a>
+
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary-lighter dark:bg-primary/20" href="reportes.html">
+                    <span class="material-symbols-outlined text-primary-darker dark:text-primary-lighter" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
+                    <p class="text-primary-darker dark:text-primary-lighter text-sm font-medium leading-normal">Reportes</p>
+                </a>
+
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary-lighter/60 dark:hover:bg-primary/10 transition-colors" href="configuracion.html">
+                    <span class="material-symbols-outlined text-primary-darker dark:text-primary-lighter">settings</span>
+                    <p class="text-primary-darker dark:text-primary-lighter text-sm font-medium leading-normal">Configuración</p>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <main class="flex-1 overflow-y-auto">
+        <div class="container mx-auto px-6 py-8">
+            
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="flex min-w-72 flex-col gap-2">
+                    <h1 class="text-4xl font-black leading-tight tracking-[-0.033em] text-primary-darker dark:text-white">Reportes y Estadísticas</h1>
+                    <p class="text-base font-normal leading-normal text-primary-text dark:text-green-400">Visualiza los datos agregados y las métricas clave de tu ganado.</p>
+                </div>
+            </div>
+
+            <div class="my-6 flex flex-wrap items-center justify-between gap-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1a2e18]/50 p-3">
+                <div class="flex items-center gap-2">
+                    <button class="flex items-center gap-2 rounded-md p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <span class="material-symbols-outlined text-xl">calendar_today</span>
+                        <span class="text-sm font-medium">Últimos 30 días</span>
+                    </button>
+                    <button class="rounded-md p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <span class="material-symbols-outlined text-xl">filter_list</span>
+                    </button>
+                    <button class="rounded-md p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <span class="material-symbols-outlined text-xl">download</span>
+                    </button>
+                </div>
+                <button class="flex h-10 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold leading-normal tracking-[0.015em] text-black transition-opacity hover:opacity-90">
+                    <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">add</span>
+                    <span class="truncate">Generar Reporte</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="flex flex-col gap-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1a2e18]/50 p-6">
+                    <p class="text-base font-medium leading-normal text-gray-600 dark:text-gray-300">Total de Animales</p>
+                    <p class="text-3xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white">1,240</p>
+                    <p class="text-base font-medium leading-normal text-success dark:text-green-400">+1.5%</p>
+                </div>
+                <div class="flex flex-col gap-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1a2e18]/50 p-6">
+                    <p class="text-base font-medium leading-normal text-gray-600 dark:text-gray-300">Peso Promedio</p>
+                    <p class="text-3xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white">550 kg</p>
+                    <p class="text-base font-medium leading-normal text-success dark:text-green-400">+0.8%</p>
+                </div>
+                <div class="flex flex-col gap-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1a2e18]/50 p-6">
+                    <p class="text-base font-medium leading-normal text-gray-600 dark:text-gray-300">Tasa de Mortalidad</p>
+                    <p class="text-3xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white">1.2%</p>
+                    <p class="text-base font-medium leading-normal text-danger dark:text-red-400">-0.2%</p>
+                </div>
+                <div class="flex flex-col gap-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1a2e18]/50 p-6">
+                    <p class="text-base font-medium leading-normal text-gray-600 dark:text-gray-300">Nuevos Nacimientos</p>
+                    <p class="text-3xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white">32</p>
+                    <p class="text-base font-medium leading-normal text-success dark:text-green-400">+5%</p>
+                </div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <div class="flex min-w-72 flex-1 flex-col gap-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1a2e18]/50 p-6">
+                    <p class="text-base font-medium leading-normal text-gray-800 dark:text-gray-200">Ganado por Raza</p>
+                    <p class="truncate text-[32px] font-bold leading-tight tracking-tight text-gray-900 dark:text-white">1,240 Total</p>
+                    <div class="flex gap-1">
+                        <p class="text-base font-normal leading-normal text-gray-500 dark:text-gray-400">Últimos 12 meses</p>
+                        <p class="text-base font-medium leading-normal text-success dark:text-green-400">+2.1%</p>
+                    </div>
+                    <div class="grid min-h-[180px] grid-cols-[auto_1fr] items-center gap-x-4 gap-y-6 py-3">
+                        <p class="text-[13px] font-bold leading-normal tracking-[0.015em] text-gray-500 dark:text-gray-400">Angus</p>
+                        <div class="h-2 flex-1 rounded-full bg-gray-100 dark:bg-gray-700">
+                            <div class="h-full rounded-full bg-success" style="width: 50%;"></div>
+                        </div>
+                        <p class="text-[13px] font-bold leading-normal tracking-[0.015em] text-gray-500 dark:text-gray-400">Hereford</p>
+                        <div class="h-2 flex-1 rounded-full bg-gray-100 dark:bg-gray-700">
+                            <div class="h-full rounded-full bg-success" style="width: 90%;"></div>
+                        </div>
+                        <p class="text-[13px] font-bold leading-normal tracking-[0.015em] text-gray-500 dark:text-gray-400">Brahman</p>
+                        <div class="h-2 flex-1 rounded-full bg-gray-100 dark:bg-gray-700">
+                            <div class="h-full rounded-full bg-success" style="width: 75%;"></div>
+                        </div>
+                        <p class="text-[13px] font-bold leading-normal tracking-[0.015em] text-gray-500 dark:text-gray-400">Charolais</p>
+                        <div class="h-2 flex-1 rounded-full bg-gray-100 dark:bg-gray-700">
+                            <div class="h-full rounded-full bg-success" style="width: 60%;"></div>
+                        </div>
+                        <p class="text-[13px] font-bold leading-normal tracking-[0.015em] text-gray-500 dark:text-gray-400">Limousin</p>
+                        <div class="h-2 flex-1 rounded-full bg-gray-100 dark:bg-gray-700">
+                            <div class="h-full rounded-full bg-success" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex min-w-72 flex-1 flex-col gap-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1a2e18]/50 p-6">
+                    <p class="text-base font-medium leading-normal text-gray-800 dark:text-gray-200">Tasa de Mortalidad Mensual</p>
+                    <p class="truncate text-[32px] font-bold leading-tight tracking-tight text-gray-900 dark:text-white">1.2% Promedio</p>
+                    <div class="flex gap-1">
+                        <p class="text-base font-normal leading-normal text-gray-500 dark:text-gray-400">Últimos 12 meses</p>
+                        <p class="text-base font-medium leading-normal text-danger dark:text-red-400">-0.2%</p>
+                    </div>
+                    <div class="flex min-h-[180px] flex-1 flex-col gap-8 py-4">
+                        <svg fill="none" height="148" preserveaspectratio="none" viewbox="-3 0 478 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H326.769H0V109Z" fill="url(#paint0_linear_1131_5935)"></path>
+                            <path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25" stroke="#21d411" stroke-linecap="round" stroke-width="3"></path>
+                            <defs>
+                                <lineargradient gradientunits="userSpaceOnUse" id="paint0_linear_1131_5935" x1="236" x2="236" y1="1" y2="149">
+                                    <stop stop-color="#21d411" stop-opacity="0.2"></stop>
+                                    <stop offset="1" stop-color="#21d411" stop-opacity="0"></stop>
+                                </lineargradient>
+                            </defs>
+                        </svg>
+                        <div class="flex justify-around">
+                            <p class="text-[13px] font-bold leading-normal tracking-[0.015em] text-gray-500 dark:text-gray-400">Ene</p>
+                            <p class="text-[13px] font-bold leading-normal tracking-[0.015em] text-gray-500 dark:text-gray-400">Feb</p>
+                            <p class="text-[13px] font-bold leading-normal tracking-[0.015em] text-gray-500 dark:text-gray-400">Mar</p>
+                            <p class="text-[13px] font-bold leading-normal tracking-[0.015em] text-gray-500 dark:text-gray-400">Abr</p>
+                            <p class="text-[13px] font-bold leading-normal tracking-[0.015em] text-gray-500 dark:text-gray-400">May</p>
+                            <p class="text-[13px] font-bold leading-normal tracking-[0.015em] text-gray-500 dark:text-gray-400">Jun</p>
+                            <p class="text-[13px] font-bold leading-normal tracking-[0.015em] text-gray-500 dark:text-gray-400">Jul</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+</body>
+</html>

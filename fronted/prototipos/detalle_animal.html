@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Detalle del Animal - Mi Diario Ganadero</title>
+  
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Estilo para iconos rellenos si se requiere */
+    .material-symbols-outlined.filled {
+      font-variation-settings: 'FILL' 1;
+    }
+  </style>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#21d411",
+            "background-light": "#f6f8f6",
+            "background-dark": "#122210",
+            "green-strong": "#2A5B3E", /* El verde oscuro del diseño */
+            "blue-calm": "#3B82F6",
+            "green-bright": "#10B981",
+            "amber-warm": "#F59E0B",
+            "red-muted": "#EF4444",
+            "charcoal-dark": "#1F2937",
+            "gray-light": "#F3F4F6",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        },
+      },
+    }
+  </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-charcoal-dark">
+  <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+    
+    <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-800 px-6 md:px-10 py-3 bg-white dark:bg-charcoal-dark/50 sticky top-0 z-30">
+        
+        <div class="flex items-center gap-4 text-charcoal-dark dark:text-gray-light">
+          <div class="size-8 text-green-strong">
+            <img src="static/images/logo.png" alt="Logo" class="w-8 h-8 object-contain" onerror="this.onerror=null;this.parentNode.innerHTML='<span class=\'material-symbols-outlined text-3xl\'>forest</span>';">
+          </div>
+          <h2 class="text-charcoal-dark dark:text-gray-light text-lg font-bold leading-tight tracking-[-0.015em]">
+            Mi Diario Ganadero
+          </h2>
+        </div>
+
+        <div class="hidden md:flex items-center gap-8">
+            <a class="text-charcoal-dark dark:text-gray-light text-sm font-medium leading-normal hover:text-green-strong transition-colors" href="index.html">Dashboard</a>
+            <a class="text-green-strong dark:text-primary text-sm font-bold leading-normal" href="inventario.html">Inventario</a>
+            <a class="text-charcoal-dark dark:text-gray-light text-sm font-medium leading-normal hover:text-green-strong transition-colors" href="salud.html">Salud</a>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-gray-100 dark:bg-charcoal-dark text-charcoal-dark dark:text-gray-light hover:bg-gray-200 transition-colors">
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+          <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-gray-200"
+            style='background-image: url("https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80");'>
+          </div>
+        </div>
+    </header>
+
+    <main class="flex-1 px-4 sm:px-6 md:px-10 py-8">
+        <div class="max-w-7xl mx-auto">
+          
+          <div class="mb-6">
+            <div class="flex flex-wrap gap-2 text-sm text-green-strong dark:text-primary/90 font-medium">
+              <a class="hover:underline opacity-70" href="inventario.html">Inventario</a>
+              <span class="opacity-50">/</span>
+              <a class="hover:underline opacity-70" href="#">Lote 5</a>
+              <span class="opacity-50">/</span>
+              <span class="text-charcoal-dark dark:text-gray-light">Animal #308</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-1 flex flex-col gap-6">
+              <div class="bg-white dark:bg-charcoal-dark/50 rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-gray-700">
+                <div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end aspect-[4/3]"
+                  style='background-image: url("https://images.unsplash.com/photo-1546445317-29f4545e9d53?q=80&w=800&auto=format&fit=crop");'>
+                </div>
+                
+                <div class="p-6">
+                  <div class="flex min-w-72 flex-col gap-2">
+                    <p class="text-charcoal-dark dark:text-white text-3xl font-black leading-tight tracking-tighter">
+                      ID: 308-TANGO
+                    </p>
+                    <p class="text-green-strong dark:text-primary/90 text-base font-medium leading-normal">
+                      Semental
+                    </p>
+                  </div>
+                  
+                  <div class="flex gap-2 pt-4 flex-wrap">
+                    <div class="flex h-7 shrink-0 items-center justify-center gap-x-2 rounded-full bg-green-100 px-3">
+                      <p class="text-green-800 text-xs font-bold uppercase tracking-wide">Activo</p>
+                    </div>
+                    <div class="flex h-7 shrink-0 items-center justify-center gap-x-2 rounded-full bg-amber-100 px-3">
+                      <p class="text-amber-800 text-xs font-bold uppercase tracking-wide">En tratamiento</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-3">
+                <button class="flex w-full items-center justify-center gap-2 rounded-lg h-12 bg-green-strong text-white text-sm font-bold shadow-md hover:bg-[#1e422d] transition-all transform active:scale-[0.98]">
+                  <span class="material-symbols-outlined text-xl">edit</span>
+                  <span>Editar Ficha</span>
+                </button>
+                <button class="flex w-full items-center justify-center gap-2 rounded-lg h-12 bg-gray-200 dark:bg-gray-700 text-charcoal-dark dark:text-white text-sm font-bold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all transform active:scale-[0.98]">
+                  <span class="material-symbols-outlined text-xl">add_circle</span>
+                  <span>Registrar Evento</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="lg:col-span-2">
+              <div class="bg-white dark:bg-charcoal-dark/50 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 h-full">
+                
+                <div class="border-b border-gray-200 dark:border-gray-700">
+                  <nav class="flex -mb-px px-6 space-x-6 overflow-x-auto scrollbar-hide">
+                    <a class="shrink-0 border-b-[3px] border-green-strong px-1 py-4 text-sm font-bold text-green-strong" href="#">
+                      Datos Básicos
+                    </a>
+                    <a class="shrink-0 border-b-[3px] border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 transition-colors" href="#">
+                      Historial Médico
+                    </a>
+                    <a class="shrink-0 border-b-[3px] border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 transition-colors" href="#">
+                      Control de Peso
+                    </a>
+                    <a class="shrink-0 border-b-[3px] border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 transition-colors" href="#">
+                      Eventos
+                    </a>
+                  </nav>
+                </div>
+
+                <div class="p-6 md:p-8">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 text-sm">
+                    <div>
+                      <p class="text-gray-500 dark:text-gray-400 mb-1">Raza</p>
+                      <p class="font-bold text-charcoal-dark dark:text-white text-base">Angus</p>
+                    </div>
+                    <div>
+                      <p class="text-gray-500 dark:text-gray-400 mb-1">Sexo</p>
+                      <p class="font-bold text-charcoal-dark dark:text-white text-base">Macho</p>
+                    </div>
+                    <div>
+                      <p class="text-gray-500 dark:text-gray-400 mb-1">Fecha de Nacimiento</p>
+                      <p class="font-bold text-charcoal-dark dark:text-white text-base">15 de Marzo, 2021</p>
+                    </div>
+                    <div>
+                      <p class="text-gray-500 dark:text-gray-400 mb-1">Edad</p>
+                      <p class="font-bold text-charcoal-dark dark:text-white text-base">3 años, 2 meses</p>
+                    </div>
+                    <div>
+                      <p class="text-gray-500 dark:text-gray-400 mb-1">ID Padre (Semental)</p>
+                      <p class="font-bold text-charcoal-dark dark:text-white text-base text-blue-600 cursor-pointer hover:underline">#102-BRUTUS</p>
+                    </div>
+                    <div>
+                      <p class="text-gray-500 dark:text-gray-400 mb-1">ID Madre</p>
+                      <p class="font-bold text-charcoal-dark dark:text-white text-base text-blue-600 cursor-pointer hover:underline">#215-LOLA</p>
+                    </div>
+                    <div>
+                      <p class="text-gray-500 dark:text-gray-400 mb-1">Color</p>
+                      <p class="font-bold text-charcoal-dark dark:text-white text-base">Negro con blanco</p>
+                    </div>
+                    <div>
+                      <p class="text-gray-500 dark:text-gray-400 mb-1">Marca</p>
+                      <p class="font-bold text-charcoal-dark dark:text-white text-base">Marca de la casa (oreja der.)</p>
+                    </div>
+                    <div class="sm:col-span-2 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700">
+                      <p class="text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider font-semibold mb-1">Ubicación Actual</p>
+                      <div class="flex items-center gap-2">
+                         <span class="material-symbols-outlined text-green-strong">location_on</span>
+                         <p class="font-bold text-charcoal-dark dark:text-white text-lg">Lote 5 - Pastizal Norte</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mt-10 border-t border-gray-200 dark:border-gray-700 pt-8">
+                    <h3 class="text-lg font-bold text-charcoal-dark dark:text-white mb-6">Eventos Recientes</h3>
+                    <div class="flow-root">
+                      <ul class="-mb-8" role="list">
+                        
+                        <li>
+                          <div class="relative pb-8">
+                            <span aria-hidden="true" class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200 dark:bg-gray-700"></span>
+                            <div class="relative flex space-x-4">
+                              <div>
+                                <span class="h-8 w-8 rounded-full bg-green-bright flex items-center justify-center ring-4 ring-white dark:ring-gray-800 shadow-sm">
+                                  <span class="material-symbols-outlined text-white text-sm">vaccines</span>
+                                </span>
+                              </div>
+                              <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                                <div>
+                                  <p class="text-sm text-gray-900 dark:text-white font-medium">
+                                    Tratamiento antiparasitario <span class="text-gray-500 font-normal">aplicado por</span> <a class="font-bold text-charcoal-dark hover:underline" href="#">Dr. Ramirez</a>
+                                  </p>
+                                </div>
+                                <div class="whitespace-nowrap text-right text-sm text-gray-500">
+                                  <time datetime="2024-05-20">hace 2d</time>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+
+                        <li>
+                          <div class="relative pb-8">
+                            <div class="relative flex space-x-4">
+                              <div>
+                                <span class="h-8 w-8 rounded-full bg-blue-calm flex items-center justify-center ring-4 ring-white dark:ring-gray-800 shadow-sm">
+                                  <span class="material-symbols-outlined text-white text-sm">moving</span>
+                                </span>
+                              </div>
+                              <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                                <div>
+                                    <p class="text-sm text-gray-900 dark:text-white font-medium">
+                                        Movimiento de ganado <span class="text-gray-500 font-normal">del Lote 2 al</span> <a class="font-bold text-charcoal-dark hover:underline" href="#">Lote 5</a>
+                                      </p>
+                                </div>
+                                <div class="whitespace-nowrap text-right text-sm text-gray-500">
+                                  <time datetime="2024-04-10">hace 1m</time>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </main>
+  </div>
+</body>
+</html>
