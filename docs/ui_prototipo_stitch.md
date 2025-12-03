@@ -76,3 +76,6 @@ El flujo del proyecto "Mi Diario Ganadero" abarca la gestión integral del ciclo
     * **Formulario de Finca:** Campos para nombre de la finca y ubicación geográfica.
     * **Gestión de Branding:** Área para visualizar, cambiar o quitar el logo de la finca.
     * **Acciones:** Botones para "Cancelar" o "Guardar Cambios".
+
+---
+**Recursos Visuales:** Las capturas de pantalla e imágenes de referencia correspondientes a cada pantalla se encuentran almacenadas en el directorio `docs/img/`.
