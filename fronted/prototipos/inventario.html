@@ -14,13 +14,16 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        /* Ocultar scrollbar pero permitir scroll */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
+        }
+        /* Transiciones suaves para los menús */
+        .sidebar-transition {
+            transition: transform 0.3s ease-in-out;
         }
     </style>
     <script id="tailwind-config">
@@ -29,7 +32,7 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#21d411", 
+                        "primary": "#21d411",
                         "primary-dark": "#1a2e18",
                         "background-light": "#f6f8f6",
                         "background-dark": "#122210",
@@ -52,20 +55,27 @@
     </script>
 </head>
 
-<body class="bg-background-light text-charcoal-dark font-display h-screen flex overflow-hidden">
+<body class="bg-background-light text-charcoal-dark font-display h-screen flex overflow-hidden relative">
 
-    <aside class="w-64 flex-shrink-0 bg-white dark:bg-primary-darker/50 p-4 border-r border-primary-border dark:border-primary-darker hidden md:block z-30">
-        <div class="flex flex-col gap-8 sticky top-4">
-            <div class="flex gap-3 items-center">
-                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" 
-                     style='background-image: url("static/images/logo.png"); background-color: #e8f3e7;'></div>
-                <div class="flex flex-col">
-                    <h1 class="text-primary-darker dark:text-primary-lighter text-base font-medium leading-normal">Finca San José</h1>
-                    <p class="text-primary-text dark:text-primary-text/80 text-sm font-normal leading-normal">Usuario</p>
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/50 z-20 hidden lg:hidden" onclick="closeAllMenus()"></div>
+
+    <aside id="main-sidebar" class="fixed inset-y-0 left-0 w-64 bg-white dark:bg-primary-darker/50 p-4 border-r border-primary-border dark:border-primary-darker z-30 transform -translate-x-full md:translate-x-0 md:static md:block sidebar-transition h-full flex flex-col">
+        <div class="flex flex-col gap-8 h-full">
+            <div class="flex justify-between items-center">
+                <div class="flex gap-3 items-center">
+                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" 
+                         style='background-image: url("static/images/logo.png"); background-color: #e8f3e7;'></div>
+                    <div class="flex flex-col">
+                        <h1 class="text-primary-darker dark:text-primary-lighter text-base font-medium leading-normal">Finca San José</h1>
+                        <p class="text-primary-text dark:text-primary-text/80 text-sm font-normal leading-normal">Usuario</p>
+                    </div>
                 </div>
+                <button class="md:hidden text-gray-500" onclick="toggleSidebar()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
             </div>
             
-            <nav class="flex flex-col gap-2">
+            <nav class="flex flex-col gap-2 overflow-y-auto">
                 <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary-lighter/60 dark:hover:bg-primary/10 transition-colors" href="index.html">
                     <span class="material-symbols-outlined text-primary-darker dark:text-primary-lighter">dashboard</span>
                     <p class="text-primary-darker dark:text-primary-lighter text-sm font-medium leading-normal">Inicio</p>
@@ -99,31 +109,34 @@
         </div>
     </aside>
 
-    <div class="flex-1 flex flex-col h-screen overflow-hidden">
+    <div class="flex-1 flex flex-col h-screen overflow-hidden relative">
         
-        <header class="flex items-center justify-between whitespace-nowrap border-b border-gray-200 bg-white px-6 py-3 shrink-0 z-20">
-            <div class="flex items-center gap-8">
-                <div class="md:hidden text-primary">
-                    <span class="material-symbols-outlined cursor-pointer">menu</span>
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-gray-200 bg-white px-4 md:px-6 py-3 shrink-0 z-10">
+            <div class="flex items-center gap-4 md:gap-8">
+                <div class="md:hidden text-primary pt-1">
+                    <button onclick="toggleSidebar()" class="focus:outline-none">
+                        <span class="material-symbols-outlined cursor-pointer text-3xl">menu</span>
+                    </button>
                 </div>
-                <h2 class="text-charcoal-dark text-lg font-bold leading-tight tracking-[-0.015em] ml-2 md:ml-0">Mi Diario Ganadero - Inventario</h2>
+                <h2 class="text-charcoal-dark text-base md:text-lg font-bold leading-tight tracking-[-0.015em] truncate">Mi Diario Ganadero <span class="hidden sm:inline">- Inventario</span></h2>
             </div>
 
-            <div class="flex items-center gap-4">
-                <button class="hidden md:flex items-center gap-2 bg-primary hover:bg-green-500 text-black font-bold px-4 py-2 rounded-lg text-sm transition-colors">
-                    <span>Registrar Animal</span>
+            <div class="flex items-center gap-3 md:gap-4">
+                <button class="flex items-center gap-2 bg-primary hover:bg-green-500 text-black font-bold px-3 py-2 rounded-lg text-sm transition-colors shadow-sm">
+                    <span class="material-symbols-outlined text-xl">add</span>
+                    <span class="hidden md:inline">Registrar Animal</span>
                 </button>
-                <div class="size-10 rounded-full bg-cover bg-center border border-gray-200" 
+                <div class="size-8 md:size-10 rounded-full bg-cover bg-center border border-gray-200" 
                      style="background-image: url('https://placehold.co/100x100');">
                 </div>
             </div>
         </header>
 
-        <div class="flex flex-1 overflow-hidden">
+        <div class="flex flex-1 overflow-hidden relative">
             
-            <aside class="w-64 bg-background-light flex flex-col pt-6 pb-4 overflow-y-auto no-scrollbar hidden lg:flex border-r border-gray-100">
-                <div class="px-6 mb-6">
-                    <div class="flex items-center gap-3 mb-2">
+            <aside id="filter-sidebar" class="fixed inset-y-0 right-0 w-72 lg:w-64 bg-background-light border-l lg:border-l-0 lg:border-r border-gray-100 z-30 transform translate-x-full lg:translate-x-0 lg:static lg:flex flex-col pt-6 pb-4 overflow-y-auto no-scrollbar sidebar-transition shadow-xl lg:shadow-none">
+                <div class="px-6 mb-6 flex justify-between items-center">
+                    <div class="flex items-center gap-3">
                         <div class="size-10 rounded-full bg-[#dcfce7] flex items-center justify-center text-primary">
                             <span class="material-symbols-outlined">filter_list</span>
                         </div>
@@ -132,6 +145,9 @@
                             <p class="text-xs text-primary font-medium cursor-pointer">Refinar resultados</p>
                         </div>
                     </div>
+                    <button class="lg:hidden text-gray-500" onclick="toggleFilters()">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
                 </div>
 
                 <div class="flex-1 px-4 space-y-2">
@@ -162,36 +178,42 @@
                 </div>
 
                 <div class="px-4 mt-4">
-                    <button class="w-full bg-primary hover:bg-green-500 text-black font-bold py-3 rounded-lg text-sm transition-colors">
+                    <button class="w-full bg-primary hover:bg-green-500 text-black font-bold py-3 rounded-lg text-sm transition-colors shadow-sm" onclick="toggleFilters()">
                         Aplicar Filtros
                     </button>
                 </div>
             </aside>
 
-            <main class="flex-1 flex flex-col h-full bg-background-light overflow-hidden">
-                <div class="flex-1 overflow-y-auto px-6 py-6 lg:px-10 lg:py-8">
+            <main class="flex-1 flex flex-col h-full bg-background-light overflow-hidden w-full">
+                <div class="flex-1 overflow-y-auto px-4 py-6 lg:px-10 lg:py-8">
                     
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                         <div>
-                            <h1 class="text-3xl md:text-4xl font-black text-gray-900 tracking-tight">Inventario General de Animales</h1>
-                            <p class="text-primary font-medium mt-1">Mostrando 150 de 320 animales activos</p>
+                            <h1 class="text-2xl md:text-3xl lg:text-4xl font-black text-gray-900 tracking-tight">Inventario General</h1>
+                            <p class="text-primary font-medium mt-1 text-sm md:text-base">Mostrando 150 de 320 animales activos</p>
                         </div>
                         
-                        <div class="relative w-full md:w-80">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
-                                <span class="material-symbols-outlined">search</span>
-                            </span>
-                            <input type="text" 
-                                   placeholder="Buscar por ID, nombre o arete..." 
-                                   class="w-full py-2.5 pl-10 pr-4 text-sm text-gray-700 bg-[#e8f0e8] border-none rounded-lg focus:ring-2 focus:ring-primary focus:bg-white transition-colors placeholder-gray-500">
+                        <div class="flex w-full md:w-auto gap-2">
+                            <div class="relative w-full md:w-72">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                                    <span class="material-symbols-outlined">search</span>
+                                </span>
+                                <input type="text" 
+                                       placeholder="Buscar..." 
+                                       class="w-full py-2.5 pl-10 pr-4 text-sm text-gray-700 bg-[#e8f0e8] border-none rounded-lg focus:ring-2 focus:ring-primary focus:bg-white transition-colors placeholder-gray-500 shadow-sm">
+                            </div>
+                            <button class="lg:hidden bg-[#e8f0e8] p-2.5 rounded-lg text-gray-700 hover:bg-gray-200" onclick="toggleFilters()">
+                                <span class="material-symbols-outlined">filter_list</span>
+                            </button>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                        <div class="overflow-x-auto">
+                    <div class="bg-transparent md:bg-white md:rounded-xl md:border md:border-gray-100 md:shadow-sm overflow-hidden">
+                        
+                        <div class="hidden md:block overflow-x-auto">
                             <table class="w-full text-left border-collapse">
                                 <thead>
-                                    <tr class="text-xs font-semibold text-gray-900 uppercase border-b border-gray-100">
+                                    <tr class="text-xs font-semibold text-gray-900 uppercase border-b border-gray-100 bg-gray-50/50">
                                         <th class="px-6 py-4">Foto</th>
                                         <th class="px-6 py-4">ID / Arete</th>
                                         <th class="px-6 py-4">Nombre</th>
@@ -202,124 +224,111 @@
                                         <th class="px-6 py-4 text-center">Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-sm divide-y divide-gray-50">
+                                <tbody class="text-sm divide-y divide-gray-50 bg-white">
                                     <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='detalle_animal.html'">
-                                        <td class="px-6 py-4">
-                                            <img src="https://placehold.co/48x48/2A5B3E/FFF?text=M" alt="Manchitas" class="size-12 rounded-full object-cover">
-                                        </td>
-                                        <td class="px-6 py-4 font-bold text-gray-900 group-hover:text-primary transition-colors">ESP010203040506</td>
+                                        <td class="px-6 py-4"><img src="https://placehold.co/48x48/2A5B3E/FFF?text=M" class="size-12 rounded-full object-cover"></td>
+                                        <td class="px-6 py-4 font-bold text-gray-900 group-hover:text-primary">ESP010203040506</td>
                                         <td class="px-6 py-4 text-primary font-medium">Manchitas</td>
                                         <td class="px-6 py-4 text-gray-600">Hembra</td>
                                         <td class="px-6 py-4 text-gray-600">Holstein</td>
                                         <td class="px-6 py-4 text-gray-600">3 años</td>
-                                        <td class="px-6 py-4">
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#dcfce7] text-green-800">
-                                                Activo
-                                            </span>
-                                        </td>
+                                        <td class="px-6 py-4"><span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#dcfce7] text-green-800">Activo</span></td>
                                         <td class="px-6 py-4 text-center">
-                                            <a href="detalle_animal.html" class="text-gray-400 hover:text-gray-600 inline-block p-2 rounded-full hover:bg-gray-100" onclick="event.stopPropagation();">
-                                                <span class="material-symbols-outlined">more_horiz</span>
-                                            </a>
+                                            <a href="#" class="text-gray-400 hover:text-gray-600 p-2"><span class="material-symbols-outlined">more_horiz</span></a>
                                         </td>
                                     </tr>
-
                                     <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='detalle_animal.html'">
-                                        <td class="px-6 py-4">
-                                            <img src="https://placehold.co/48x48/A0522D/FFF?text=T" alt="Toro" class="size-12 rounded-full object-cover">
-                                        </td>
-                                        <td class="px-6 py-4 font-bold text-gray-900 group-hover:text-primary transition-colors">ESP010203040507</td>
+                                        <td class="px-6 py-4"><img src="https://placehold.co/48x48/A0522D/FFF?text=T" class="size-12 rounded-full object-cover"></td>
+                                        <td class="px-6 py-4 font-bold text-gray-900 group-hover:text-primary">ESP010203040507</td>
                                         <td class="px-6 py-4 text-primary font-medium">Toro</td>
                                         <td class="px-6 py-4 text-gray-600">Macho</td>
                                         <td class="px-6 py-4 text-gray-600">Angus</td>
                                         <td class="px-6 py-4 text-gray-600">5 años</td>
-                                        <td class="px-6 py-4">
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#dcfce7] text-green-800">
-                                                Activo
-                                            </span>
-                                        </td>
+                                        <td class="px-6 py-4"><span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#dcfce7] text-green-800">Activo</span></td>
                                         <td class="px-6 py-4 text-center">
-                                            <a href="detalle_animal.html" class="text-gray-400 hover:text-gray-600 inline-block p-2 rounded-full hover:bg-gray-100" onclick="event.stopPropagation();">
-                                                <span class="material-symbols-outlined">more_horiz</span>
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='detalle_animal.html'">
-                                        <td class="px-6 py-4">
-                                            <img src="https://placehold.co/48x48/8B4513/FFF?text=B" alt="Becerro" class="size-12 rounded-full object-cover">
-                                        </td>
-                                        <td class="px-6 py-4 font-bold text-gray-900 group-hover:text-primary transition-colors">ESP010203040508</td>
-                                        <td class="px-6 py-4 text-primary font-medium">Becerro</td>
-                                        <td class="px-6 py-4 text-gray-600">Macho</td>
-                                        <td class="px-6 py-4 text-gray-600">Holstein</td>
-                                        <td class="px-6 py-4 text-gray-600">6 meses</td>
-                                        <td class="px-6 py-4">
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#dcfce7] text-green-800">
-                                                Activo
-                                            </span>
-                                        </td>
-                                        <td class="px-6 py-4 text-center">
-                                            <a href="detalle_animal.html" class="text-gray-400 hover:text-gray-600 inline-block p-2 rounded-full hover:bg-gray-100" onclick="event.stopPropagation();">
-                                                <span class="material-symbols-outlined">more_horiz</span>
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='detalle_animal.html'">
-                                        <td class="px-6 py-4">
-                                            <img src="https://placehold.co/48x48/556B2F/FFF?text=P" alt="Pinta" class="size-12 rounded-full object-cover">
-                                        </td>
-                                        <td class="px-6 py-4 font-bold text-gray-900 group-hover:text-primary transition-colors">ESP010203040509</td>
-                                        <td class="px-6 py-4 text-primary font-medium">Pinta</td>
-                                        <td class="px-6 py-4 text-gray-600">Hembra</td>
-                                        <td class="px-6 py-4 text-gray-600">Parda</td>
-                                        <td class="px-6 py-4 text-gray-600">8 años</td>
-                                        <td class="px-6 py-4">
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-gray-200 text-gray-600">
-                                                Vendido
-                                            </span>
-                                        </td>
-                                        <td class="px-6 py-4 text-center">
-                                            <a href="detalle_animal.html" class="text-gray-400 hover:text-gray-600 inline-block p-2 rounded-full hover:bg-gray-100" onclick="event.stopPropagation();">
-                                                <span class="material-symbols-outlined">more_horiz</span>
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr class="hover:bg-gray-50 transition-colors cursor-pointer group" onclick="window.location.href='detalle_animal.html'">
-                                        <td class="px-6 py-4">
-                                            <img src="https://placehold.co/48x48/000000/FFF?text=L" alt="Luna" class="size-12 rounded-full object-cover">
-                                        </td>
-                                        <td class="px-6 py-4 font-bold text-gray-900 group-hover:text-primary transition-colors">ESP010203040510</td>
-                                        <td class="px-6 py-4 text-primary font-medium">Luna</td>
-                                        <td class="px-6 py-4 text-gray-600">Hembra</td>
-                                        <td class="px-6 py-4 text-gray-600">Simmental</td>
-                                        <td class="px-6 py-4 text-gray-600">4 años</td>
-                                        <td class="px-6 py-4">
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#dcfce7] text-green-800">
-                                                Activo
-                                            </span>
-                                        </td>
-                                        <td class="px-6 py-4 text-center">
-                                            <a href="detalle_animal.html" class="text-gray-400 hover:text-gray-600 inline-block p-2 rounded-full hover:bg-gray-100" onclick="event.stopPropagation();">
-                                                <span class="material-symbols-outlined">more_horiz</span>
-                                            </a>
+                                            <a href="#" class="text-gray-400 hover:text-gray-600 p-2"><span class="material-symbols-outlined">more_horiz</span></a>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
+
+                        <div class="md:hidden flex flex-col gap-4">
+                            
+                            <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 cursor-pointer" onclick="window.location.href='detalle_animal.html'">
+                                <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-50">
+                                    <div class="flex items-center gap-3">
+                                        <img src="https://placehold.co/48x48/2A5B3E/FFF?text=M" class="size-12 rounded-full object-cover">
+                                        <div>
+                                            <p class="font-bold text-gray-900 text-base">Manchitas</p>
+                                            <p class="text-xs text-primary font-bold">ESP010203040506</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#dcfce7] text-green-800">Activo</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-y-3 text-sm">
+                                    <div><p class="text-gray-500 text-xs">Raza</p><p class="font-medium text-gray-700">Holstein</p></div>
+                                    <div><p class="text-gray-500 text-xs">Sexo</p><p class="font-medium text-gray-700">Hembra</p></div>
+                                    <div><p class="text-gray-500 text-xs">Edad</p><p class="font-medium text-gray-700">3 años</p></div>
+                                    <div class="flex justify-end items-end">
+                                         <span class="material-symbols-outlined text-gray-400">arrow_forward</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 cursor-pointer" onclick="window.location.href='detalle_animal.html'">
+                                <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-50">
+                                    <div class="flex items-center gap-3">
+                                        <img src="https://placehold.co/48x48/A0522D/FFF?text=T" class="size-12 rounded-full object-cover">
+                                        <div>
+                                            <p class="font-bold text-gray-900 text-base">Toro</p>
+                                            <p class="text-xs text-primary font-bold">ESP010203040507</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#dcfce7] text-green-800">Activo</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-y-3 text-sm">
+                                    <div><p class="text-gray-500 text-xs">Raza</p><p class="font-medium text-gray-700">Angus</p></div>
+                                    <div><p class="text-gray-500 text-xs">Sexo</p><p class="font-medium text-gray-700">Macho</p></div>
+                                    <div><p class="text-gray-500 text-xs">Edad</p><p class="font-medium text-gray-700">5 años</p></div>
+                                    <div class="flex justify-end items-end">
+                                         <span class="material-symbols-outlined text-gray-400">arrow_forward</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 cursor-pointer" onclick="window.location.href='detalle_animal.html'">
+                                <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-50">
+                                    <div class="flex items-center gap-3">
+                                        <img src="https://placehold.co/48x48/556B2F/FFF?text=P" class="size-12 rounded-full object-cover">
+                                        <div>
+                                            <p class="font-bold text-gray-900 text-base">Pinta</p>
+                                            <p class="text-xs text-primary font-bold">ESP010203040509</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-bold bg-gray-200 text-gray-600">Vendido</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-y-3 text-sm">
+                                    <div><p class="text-gray-500 text-xs">Raza</p><p class="font-medium text-gray-700">Parda</p></div>
+                                    <div><p class="text-gray-500 text-xs">Sexo</p><p class="font-medium text-gray-700">Hembra</p></div>
+                                    <div><p class="text-gray-500 text-xs">Edad</p><p class="font-medium text-gray-700">8 años</p></div>
+                                    <div class="flex justify-end items-end">
+                                         <span class="material-symbols-outlined text-gray-400">arrow_forward</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
 
                     <div class="flex justify-between items-center mt-6">
-                        <button class="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition">
+                        <button class="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition bg-white">
                             <span class="material-symbols-outlined text-sm">arrow_back</span>
-                            Anterior
+                            <span class="hidden sm:inline">Anterior</span>
                         </button>
                         <span class="text-primary text-sm font-medium">Página 1 de 22</span>
-                        <button class="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition">
-                            Siguiente
+                        <button class="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition bg-white">
+                            <span class="hidden sm:inline">Siguiente</span>
                             <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </button>
                     </div>
@@ -328,5 +337,68 @@
             </main>
         </div>
     </div>
+
+    <script>
+        const sidebar = document.getElementById('main-sidebar');
+        const filterSidebar = document.getElementById('filter-sidebar');
+        const overlay = document.getElementById('mobile-overlay');
+
+        function toggleSidebar() {
+            // Cierra filtros si está abierto
+            if (!filterSidebar.classList.contains('translate-x-full') && window.innerWidth < 1024) {
+                toggleFilters();
+            }
+            
+            const isClosed = sidebar.classList.contains('-translate-x-full');
+            if (isClosed) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+
+        function toggleFilters() {
+            // Cierra sidebar principal si está abierto
+            if (!sidebar.classList.contains('-translate-x-full') && window.innerWidth < 768) {
+                toggleSidebar();
+                // Re-enable overlay for filters
+                overlay.classList.remove('hidden'); 
+                return;
+            }
+
+            const isClosed = filterSidebar.classList.contains('translate-x-full');
+            if (isClosed) {
+                filterSidebar.classList.remove('translate-x-full');
+                if(window.innerWidth < 1024) overlay.classList.remove('hidden');
+            } else {
+                filterSidebar.classList.add('translate-x-full');
+                if(sidebar.classList.contains('-translate-x-full')) overlay.classList.add('hidden');
+            }
+        }
+
+        function closeAllMenus() {
+            sidebar.classList.add('-translate-x-full');
+            filterSidebar.classList.add('translate-x-full');
+            overlay.classList.add('hidden');
+        }
+
+        // Ajustar al redimensionar ventana
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                overlay.classList.add('hidden');
+                sidebar.classList.remove('-translate-x-full'); // Reset para desktop
+            } else {
+                sidebar.classList.add('-translate-x-full'); // Reset para móvil
+            }
+            
+            if (window.innerWidth >= 1024) {
+                filterSidebar.classList.remove('translate-x-full');
+            } else {
+                filterSidebar.classList.add('translate-x-full');
+            }
+        });
+    </script>
 </body>
 </html>
