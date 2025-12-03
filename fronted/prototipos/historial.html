@@ -1,8 +1,12 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Mi Diario Ganadero</title>
+    <title>Dashboard - Mi Diario Ganadero</title>
+    
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
     
@@ -12,252 +16,218 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#21d411", // Verde vibrante
-                        "primary-dark": "#1a2e18", // Verde oscuro para fondos/textos
-                        "secondary": "#529a4c",
-                        "background-light": "#f8fcf8",
+                        "primary": "#15803d", // Verde ajustado
+                        "primary-dark": "#14532d",
+                        "background-light": "#f0fdf4",
                         "background-dark": "#122210",
-                        "surface": "#ffffff",
+                        "text-light-primary": "#1f2937",
+                        "text-light-secondary": "#4b5563",
+                        "border-light": "#e5e7eb"
                     },
                     fontFamily: {
                         "display": ["Inter", "sans-serif"]
                     }
-                },
-            },
+                }
+            }
         }
     </script>
+
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        /* Animación suave para el menú móvil */
-        .sidebar-transition { transition: transform 0.3s ease-in-out; }
+        /* Transición suave para el sidebar */
+        .sidebar-transition { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
     </style>
 </head>
 
-<!DOCTYPE html>
-<html lang="es" class="light">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Dashboard - Mi Diario Ganadero</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-    <script>
-        tailwind.config = {
-            theme: { extend: { colors: { "primary": "#15803d", "background-light": "#f0fdf4" }, fontFamily: { "display": ["Inter", "sans-serif"] } } }
-        }
-    </script>
-</head>
-
-<body class="font-display bg-background-light text-gray-800">
-    <div class="flex h-screen overflow-hidden">
+<body class="font-display bg-background-light text-gray-800 antialiased">
+    
+    <div class="flex h-screen overflow-hidden bg-gray-50">
         
-        <aside id="sidebar" class="bg-white border-r border-gray-200 w-64 flex-shrink-0 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-200 ease-in-out z-30 flex flex-col h-full">
-            <div class="p-6 flex items-center gap-3">
-                <img src="static/images/logo.png" alt="Logo" class="w-10 h-10 rounded-full bg-green-100 object-cover" onerror="this.src='https://placehold.co/40x40/green/white?text=G'">
+        <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 z-20 bg-black/50 hidden md:hidden transition-opacity opacity-0"></div>
+
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-30 w-64 bg-white border-r border-gray-200 transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 flex flex-col h-full shadow-lg md:shadow-none">
+            
+            <div class="p-6 flex items-center gap-3 border-b border-gray-100">
+                <img src="https://placehold.co/40x40/15803d/white?text=G" alt="Logo" class="w-10 h-10 rounded-full object-cover">
                 <div>
-                    <h1 class="text-base font-bold text-gray-900">Mi Diario Ganadero</h1>
-                    <p class="text-xs text-green-600">Finca El Progreso</p>
+                    <h1 class="text-base font-bold text-gray-900 leading-tight">Mi Diario Ganadero</h1>
+                    <p class="text-xs text-primary font-medium">Finca El Progreso</p>
                 </div>
+                <button onclick="toggleSidebar()" class="md:hidden ml-auto text-gray-500">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
             </div>
 
-            <nav class="flex-1 px-4 space-y-2 mt-4 overflow-y-auto">
-                <a href="index.html" class="flex items-center gap-3 px-3 py-2 bg-green-50 text-primary rounded-lg font-medium">
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span> Inicio
+            <nav class="flex-1 px-4 space-y-1 mt-4 overflow-y-auto">
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 bg-green-50 text-primary rounded-lg font-medium group">
+                    <span class="material-symbols-outlined group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">dashboard</span> 
+                    Inicio
                 </a>
-                <a href="inventario.html" class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors">
-                    <span class="material-symbols-outlined">inventory_2</span> Inventario
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-lg transition-all group">
+                    <span class="material-symbols-outlined group-hover:scale-110 transition-transform">inventory_2</span> 
+                    Inventario
                 </a>
-                <a href="salud.html" class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors">
-                    <span class="material-symbols-outlined">medical_services</span> Salud
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-lg transition-all group">
+                    <span class="material-symbols-outlined group-hover:scale-110 transition-transform">medical_services</span> 
+                    Salud
                 </a>
-                <a href="historial.html" class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors">
-                    <span class="material-symbols-outlined">history</span> Historial
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-lg transition-all group">
+                    <span class="material-symbols-outlined group-hover:scale-110 transition-transform">history</span> 
+                    Historial
                 </a>
-                <a href="reportes.html" class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors">
-                    <span class="material-symbols-outlined">bar_chart</span> Reportes
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-lg transition-all group">
+                    <span class="material-symbols-outlined group-hover:scale-110 transition-transform">bar_chart</span> 
+                    Reportes
                 </a>
-                <a href="configuracion.html" class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors">
-                    <span class="material-symbols-outlined">settings</span> Configuración
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-lg transition-all group">
+                    <span class="material-symbols-outlined group-hover:scale-110 transition-transform">settings</span> 
+                    Configuración
                 </a>
             </nav>
 
             <div class="p-4 border-t border-gray-200">
-                <a href="#" class="flex items-center gap-3 px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg text-sm font-medium">
+                <a href="#" class="flex items-center gap-3 px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg text-sm font-medium transition-colors">
                     <span class="material-symbols-outlined">logout</span> Cerrar Sesión
                 </a>
             </div>
         </aside>
 
-        <main class="flex-1 p-6 lg:p-10">
-            <div class="mx-auto flex w-full max-w-5xl flex-col gap-6">
-                <div class="flex flex-wrap items-end justify-between gap-4">
-                    <div class="flex min-w-72 flex-col gap-2">
-                        <h1
-                            class="text-text-light-primary dark:text-text-dark-primary text-4xl font-black leading-tight tracking-[-0.033em]">
-                            Historial de Eventos</h1>
-                        <p
-                            class="text-text-light-secondary dark:text-text-dark-secondary text-base font-normal leading-normal">
-                            Animales vendidos, perdidos o fallecidos que ya no están en el inventario activo.</p>
+        <div class="flex-1 flex flex-col h-screen overflow-hidden relative">
+            
+            <header class="md:hidden bg-white border-b border-gray-200 p-4 flex items-center justify-between sticky top-0 z-10">
+                <div class="flex items-center gap-2">
+                    <button onclick="toggleSidebar()" class="text-gray-600 focus:outline-none p-1 rounded hover:bg-gray-100">
+                        <span class="material-symbols-outlined text-3xl">menu</span>
+                    </button>
+                    <span class="font-bold text-lg text-gray-800">Mi Diario Ganadero</span>
+                </div>
+                <img src="https://placehold.co/32x32/15803d/white?text=G" alt="User" class="w-8 h-8 rounded-full">
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-4 lg:p-8 bg-background-light">
+                <div class="mx-auto w-full max-w-6xl flex flex-col gap-6">
+                    
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                        <div class="flex flex-col gap-1">
+                            <h1 class="text-3xl md:text-4xl font-black text-gray-900 tracking-tight">Historial de Eventos</h1>
+                            <p class="text-gray-500 text-sm md:text-base">Animales vendidos, perdidos o fallecidos.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                        <div class="border-b border-gray-200 overflow-x-auto">
+                            <nav class="flex gap-6 min-w-max">
+                                <a href="#" class="border-b-[3px] border-primary text-primary pb-3 pt-2 px-1">
+                                    <p class="text-sm font-bold">Ventas</p>
+                                </a>
+                                <a href="#" class="border-b-[3px] border-transparent text-gray-500 hover:text-gray-700 pb-3 pt-2 px-1">
+                                    <p class="text-sm font-bold">Pérdidas/Fallecimientos</p>
+                                </a>
+                            </nav>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                            <div class="flex gap-2 w-full sm:w-auto">
+                                <button class="p-2.5 rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 hover:border-primary/50 transition-colors">
+                                    <span class="material-symbols-outlined">search</span>
+                                </button>
+                                <button class="p-2.5 rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 hover:border-primary/50 transition-colors">
+                                    <span class="material-symbols-outlined">filter_list</span>
+                                </button>
+                            </div>
+                            <button class="w-full sm:w-auto flex h-10 items-center justify-center gap-2 rounded-lg bg-primary px-4 text-sm font-bold text-white hover:bg-primary-dark transition-colors shadow-sm">
+                                <span class="material-symbols-outlined text-lg">download</span>
+                                <span>Exportar CSV</span>
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                            <div class="overflow-x-auto">
+                                <table class="w-full min-w-[800px] text-left border-collapse">
+                                    <thead>
+                                        <tr class="bg-gray-50 border-b border-gray-200">
+                                            <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider w-20">Foto</th>
+                                            <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">ID/Nombre</th>
+                                            <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Raza</th>
+                                            <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Fecha Venta</th>
+                                            <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Precio</th>
+                                            <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-100">
+                                        <tr class="hover:bg-gray-50 transition-colors group">
+                                            <td class="px-6 py-4">
+                                                <div class="w-10 h-10 rounded-full bg-gray-200 bg-cover bg-center shadow-sm" style="background-image: url('https://placehold.co/40x40/black/white?text=V1');"></div>
+                                            </td>
+                                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Vaca #015 'Manchitas'</td>
+                                            <td class="px-6 py-4 text-sm text-gray-600">Holstein</td>
+                                            <td class="px-6 py-4 text-sm text-gray-600">15/08/2023</td>
+                                            <td class="px-6 py-4 text-sm font-medium text-green-700">$1,200.00</td>
+                                            <td class="px-6 py-4 text-right">
+                                                <a href="#" class="text-sm font-semibold text-primary hover:text-primary-dark">Ver Detalles</a>
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50 transition-colors group">
+                                            <td class="px-6 py-4">
+                                                <div class="w-10 h-10 rounded-full bg-gray-200 bg-cover bg-center shadow-sm" style="background-image: url('https://placehold.co/40x40/brown/white?text=T1');"></div>
+                                            </td>
+                                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Toro #007 'Tornado'</td>
+                                            <td class="px-6 py-4 text-sm text-gray-600">Angus</td>
+                                            <td class="px-6 py-4 text-sm text-gray-600">12/08/2023</td>
+                                            <td class="px-6 py-4 text-sm font-medium text-green-700">$1,850.00</td>
+                                            <td class="px-6 py-4 text-right">
+                                                <a href="#" class="text-sm font-semibold text-primary hover:text-primary-dark">Ver Detalles</a>
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50 transition-colors group">
+                                            <td class="px-6 py-4">
+                                                <div class="w-10 h-10 rounded-full bg-gray-200 bg-cover bg-center shadow-sm" style="background-image: url('https://placehold.co/40x40/orange/white?text=J1');"></div>
+                                            </td>
+                                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Vaca #021 'Miel'</td>
+                                            <td class="px-6 py-4 text-sm text-gray-600">Jersey</td>
+                                            <td class="px-6 py-4 text-sm text-gray-600">05/08/2023</td>
+                                            <td class="px-6 py-4 text-sm font-medium text-green-700">$1,100.00</td>
+                                            <td class="px-6 py-4 text-right">
+                                                <a href="#" class="text-sm font-semibold text-primary hover:text-primary-dark">Ver Detalles</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="md:hidden text-center py-2 text-xs text-gray-400 bg-gray-50 border-t border-gray-100">
+                                Desliza horizontalmente para ver más &rarr;
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <div class="flex flex-col gap-4">
-                    <div class="border-b border-border-light dark:border-border-dark">
-                        <div class="flex gap-8">
-                            <a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary text-text-light-primary dark:text-text-dark-primary pb-[13px] pt-2"
-                                href="#">
-                                <p class="text-sm font-bold leading-normal tracking-[0.015em]">Ventas</p>
-                            </a>
-                            <a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-text-light-secondary dark:text-text-dark-secondary pb-[13px] pt-2"
-                                href="#">
-                                <p class="text-sm font-bold leading-normal tracking-[0.015em]">
-                                    Pérdidas/Fallecimientos</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap items-center justify-between gap-2">
-                        <div class="flex gap-2">
-                            <button
-                                class="p-2 rounded-lg text-text-light-primary dark:text-text-dark-primary hover:bg-primary/20">
-                                <span class="material-symbols-outlined">search</span>
-                            </button>
-                            <button
-                                class="p-2 rounded-lg text-text-light-primary dark:text-text-dark-primary hover:bg-primary/20">
-                                <span class="material-symbols-outlined">filter_list</span>
-                            </button>
-                        </div>
-                        <button
-                            class="flex h-10 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold leading-normal tracking-[0.015em] text-background-dark">
-                            <span class="material-symbols-outlined text-lg"
-                                style="font-variation-settings: 'FILL' 1;">download</span>
-                            <span class="truncate">Exportar a CSV</span>
-                        </button>
-                    </div>
-                    <div class="overflow-hidden rounded-lg border border-border-light dark:border-border-dark">
-                        <div class="overflow-x-auto">
-                            <table class="w-full min-w-[800px] flex-1">
-                                <thead>
-                                    <tr class="bg-background-light dark:bg-background-dark">
-                                        <th
-                                            class="px-4 py-3 text-left text-sm font-medium text-text-light-primary dark:text-text-dark-primary w-16">
-                                            Foto</th>
-                                        <th
-                                            class="px-4 py-3 text-left text-sm font-medium text-text-light-primary dark:text-text-dark-primary">
-                                            ID/Nombre</th>
-                                        <th
-                                            class="px-4 py-3 text-left text-sm font-medium text-text-light-primary dark:text-text-dark-primary">
-                                            Raza</th>
-                                        <th
-                                            class="px-4 py-3 text-left text-sm font-medium text-text-light-primary dark:text-text-dark-primary">
-                                            Fecha de Venta</th>
-                                        <th
-                                            class="px-4 py-3 text-left text-sm font-medium text-text-light-primary dark:text-text-dark-primary">
-                                            Precio de Venta</th>
-                                        <th
-                                            class="px-4 py-3 text-left text-sm font-medium text-text-light-primary dark:text-text-dark-primary">
-                                            Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-border-light dark:divide-border-dark">
-                                    <tr>
-                                        <td class="h-[72px] px-4 py-2">
-                                            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10"
-                                                data-alt="Photo of a Holstein cow named Manchitas"
-                                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDtfE5nKrKFTkDhm5V-11b2dxnvzu6q1xrv_Op5cJrH_0MbXGj5LcngXDqs56DJWkeTAQkb3jvt1DkYbRXlU11gw4MUhgoLv7mIPbB_KrcAlU-d_nM2XOn1AS8tR04K7Mu0g4rNiZO4K6H03m1cn1g7lS8_qHWMdkeQwM5_FZX4Nv8A1LRlaiYrehPtNPPW8oEWzXzbwlDU2K6wggbLfMXh9PPOmZNr6GfimL7OUUmgOKaTg8sr_VHzUKkAZZO6KGPVsMqwPKZfW0aP");'>
-                                            </div>
-                                        </td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-primary dark:text-text-dark-primary">
-                                            Vaca #015 'Manchitas'</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-secondary dark:text-text-dark-secondary">
-                                            Holstein</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-secondary dark:text-text-dark-secondary">
-                                            15/08/2023</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-secondary dark:text-text-dark-secondary">
-                                            $1,200.00</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-bold leading-normal tracking-[0.015em] text-text-light-secondary dark:text-text-dark-secondary cursor-pointer hover:text-primary">
-                                            Ver Detalles</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="h-[72px] px-4 py-2">
-                                            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10"
-                                                data-alt="Photo of an Angus bull named Tornado"
-                                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2kyJizhaaS2-3mqD8VdaxeTJxfZw2rxjrlen2KvaFmVQs-9aVe2s7OTcoWORdCHo2hI-I6G3Bfo9-oBVKazh0AToW9UA2IUlzD4JQKel2L5-rUZWyZx77Bh3GHW430_Up5QYLFoT6iGSY2KO35zVKHKdmh2Qwt0wfgt9OZugDUG-Fhs3o_AzDuzYW7V6LRSMV4z04Hjv4RMdX90e-S6QM_Fw_p2x96ySkFY2TAITkMmXlbJZTYxeUOp8SFlv5Z8IY-A3TGwvexg1o");'>
-                                            </div>
-                                        </td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-primary dark:text-text-dark-primary">
-                                            Toro #007 'Tornado'</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-secondary dark:text-text-dark-secondary">
-                                            Angus</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-secondary dark:text-text-dark-secondary">
-                                            12/08/2023</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-secondary dark:text-text-dark-secondary">
-                                            $1,850.00</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-bold leading-normal tracking-[0.015em] text-text-light-secondary dark:text-text-dark-secondary cursor-pointer hover:text-primary">
-                                            Ver Detalles</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="h-[72px] px-4 py-2">
-                                            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10"
-                                                data-alt="Photo of a Hereford calf"
-                                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5N-JtAjUojwMbpncpLL-mVacbbKXjI3J3-xbdRU75a4lIHA5X0QP6YJ3XGL6ENYDMAPmAKnlJUQhHHNgZZtpU6D7EggJ0fFaQ4sly_j6Ky3o4yehbWOmzzB8RhmqQxk8tRUnYHRb2-T4cPbgFqO4J9mjUwPi--PI3C_UVrDC97_kUabWnGiH0OWkFF5few20zVZDiaEqyYRJkByOPMxFbfr8ax-MrEUTn5HAxcAqG719mtcfFF0xtqiROV0xg0crDMAesfzCqARyT");'>
-                                            </div>
-                                        </td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-primary dark:text-text-dark-primary">
-                                            Ternero #112</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-secondary dark:text-text-dark-secondary">
-                                            Hereford</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-secondary dark:text-text-dark-secondary">
-                                            10/08/2023</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-secondary dark:text-text-dark-secondary">
-                                            $750.00</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-bold leading-normal tracking-[0.015em] text-text-light-secondary dark:text-text-dark-secondary cursor-pointer hover:text-primary">
-                                            Ver Detalles</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="h-[72px] px-4 py-2">
-                                            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10"
-                                                data-alt="Photo of a Jersey cow named Miel"
-                                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBbiijP4QEhhQqc3pF0CXgOAImp8-hNym-ORLDjpF5ACHWzjD_Tstq7KeVoyr3jQlWo18soZ3RFRKeswtuSIXly28JM6oA1R8k1QufcMHpYgCQSq14M8vx4zvHYe__tunyllAzApdG-7czaZ31KtthE_2rTzKRahmds1v6dWPiCS0Z5a_u5PNOGpRMTzB32oP6aQ0uyZ9SKIMdCNlDf6A_srrSd5_EuwRPqUidPKwRPGtvyq74vKJHZp812iYEk4tWRs2eTLaB_mZ2c");'>
-                                            </div>
-                                        </td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-primary dark:text-text-dark-primary">
-                                            Vaca #021 'Miel'</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-secondary dark:text-text-dark-secondary">
-                                            Jersey</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-secondary dark:text-text-dark-secondary">
-                                            05/08/2023</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-normal leading-normal text-text-light-secondary dark:text-text-dark-secondary">
-                                            $1,100.00</td>
-                                        <td
-                                            class="h-[72px] px-4 py-2 text-sm font-bold leading-normal tracking-[0.015em] text-text-light-secondary dark:text-text-dark-secondary cursor-pointer hover:text-primary">
-                                            Ver Detalles</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+            </main>
+        </div>
     </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            
+            // Toggle sidebar translation
+            if (sidebar.classList.contains('-translate-x-full')) {
+                // Abrir
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                // Pequeño delay para permitir que la transición de opacidad ocurra
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-0');
+                }, 10);
+            } else {
+                // Cerrar
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 300); // Esperar a que termine la animación
+            }
+        }
+    </script>
 </body>
 </html>
